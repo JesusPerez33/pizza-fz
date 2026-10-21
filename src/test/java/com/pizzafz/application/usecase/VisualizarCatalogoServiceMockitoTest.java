@@ -1,6 +1,7 @@
 package com.pizzafz.application.usecase;
 
 import com.pizzafz.domain.exception.NoHayPizzasDisponiblesException;
+import com.pizzafz.domain.exception.PizzaAgotadaException;
 import com.pizzafz.domain.exception.PizzaNoEncontradaException;
 import com.pizzafz.domain.model.Pizza;
 import com.pizzafz.domain.port.out.PizzaRepositoryPort;
@@ -27,6 +28,8 @@ class VisualizarCatalogoServiceMockitoTest {
     @InjectMocks
     private VisualizarCatalogoService catalogoService;
 
+    // ---------- consultarPizzasDisponibles ----------
+
     @Test
     @DisplayName("Mockito: devuelve las pizzas que entrega el repositorio")
     void debeDevolverPizzasDelRepositorio() {
@@ -45,7 +48,25 @@ class VisualizarCatalogoServiceMockitoTest {
     void debeLanzarExcepcionSiNoHayPizzas() {
         when(pizzaRepository.buscarDisponibles()).thenReturn(List.of());
 
-        assertThrows(NoHayPizzasDisponiblesException.class, catalogoService::consultarPizzasDisponibles);
+        NoHayPizzasDisponiblesException exception = assertThrows(
+                NoHayPizzasDisponiblesException.class,
+                catalogoService::consultarPizzasDisponibles);
+
+        assertEquals("No hay pizzas disponibles", exception.getMessage());
+    }
+
+    // ---------- consultarDetallePizza ----------
+
+    @Test
+    @DisplayName("Mockito: devuelve el detalle de una pizza disponible")
+    void debeConsultarDetalle() {
+        Pizza hawaiana = new Pizza(1L, "Hawaiana", "Piña y jamón", new BigDecimal("387000"), 5, true);
+        when(pizzaRepository.buscarPorId(1L)).thenReturn(Optional.of(hawaiana));
+
+        Pizza detalle = catalogoService.consultarDetallePizza(1L);
+
+        assertSame(hawaiana, detalle);
+        verify(pizzaRepository).buscarPorId(1L);
     }
 
     @Test
@@ -54,5 +75,29 @@ class VisualizarCatalogoServiceMockitoTest {
         when(pizzaRepository.buscarPorId(99L)).thenReturn(Optional.empty());
 
         assertThrows(PizzaNoEncontradaException.class, () -> catalogoService.consultarDetallePizza(99L));
+
+        verify(pizzaRepository).buscarPorId(99L);
+    }
+
+    @Test
+    @DisplayName("Mockito: lanza PizzaAgotadaException si la pizza no tiene disponibilidad")
+    void debeLanzarPizzaAgotada() {
+        Pizza agotada = new Pizza(3L, "Agotada", "Desc", new BigDecimal("100"), 0, true);
+        when(pizzaRepository.buscarPorId(3L)).thenReturn(Optional.of(agotada));
+
+        PizzaAgotadaException exception = assertThrows(
+                PizzaAgotadaException.class,
+                () -> catalogoService.consultarDetallePizza(3L));
+
+        assertEquals("Pizza agotada", exception.getMessage());
+    }
+
+    @Test
+    @DisplayName("Mockito: lanza PizzaAgotadaException si la pizza está inactiva")
+    void debeLanzarPizzaInactiva() {
+        Pizza inactiva = new Pizza(4L, "Inactiva", "Desc", new BigDecimal("100"), 5, false);
+        when(pizzaRepository.buscarPorId(4L)).thenReturn(Optional.of(inactiva));
+
+        assertThrows(PizzaAgotadaException.class, () -> catalogoService.consultarDetallePizza(4L));
     }
 }
