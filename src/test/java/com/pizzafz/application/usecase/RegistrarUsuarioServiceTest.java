@@ -64,7 +64,7 @@ class RegistrarUsuarioServiceTest {
         registrarUsuarioService.registrar(comando1);
 
         RegistrarUsuarioCommand comando2 = new RegistrarUsuarioCommand(
-                "Carlos Segundo",
+                "Carlos Segundo2",
                 "duplicado@gmail.com",
                 "password12345",
                 "3007654321",

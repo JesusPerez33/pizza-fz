@@ -61,7 +61,7 @@ class IniciarSesionServiceTest {
     @Test
     @DisplayName("Debe lanzar CredencialesInvalidasException si la contraseña es incorrecta")
     void debeLanzarExcepcionPasswordIncorrecto() {
-        String passHash = passwordHasher.hashear("secreto123");
+        String passHash = passwordHasher.hashear("secreto1234");
         Cliente cliente = new Cliente(null, "Ana Maria", "ana@gmail.com", passHash, "3101234567", "Carrera 5 # 12-34", true, java.time.LocalDateTime.now());
         usuarioRepository.guardar(cliente);
 

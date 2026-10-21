@@ -103,4 +103,19 @@ class GestionarCarritoServiceMockitoTest {
         assertTrue(resultado.getItems().isEmpty());
         assertEquals(BigDecimal.ZERO, resultado.getTotal());
     }
+
+
+    @Test
+    @DisplayName("Mockito: si el cliente ya tiene carrito lo devuelve sin guardar")
+    void debeDevolverCarritoExistenteSinGuardar() {
+        Carrito existente = new Carrito(1L, CLIENTE_ID);
+        when(carritoRepository.buscarPorClienteId(CLIENTE_ID)).thenReturn(Optional.of(existente));
+
+        Carrito resultado = carritoService.obtenerCarrito(CLIENTE_ID);
+
+        assertSame(existente, resultado);
+        verify(carritoRepository, never()).guardar(any());
+}
+
+
 }

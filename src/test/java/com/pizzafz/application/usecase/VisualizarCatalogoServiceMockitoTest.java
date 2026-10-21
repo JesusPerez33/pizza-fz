@@ -30,7 +30,7 @@ class VisualizarCatalogoServiceMockitoTest {
     @Test
     @DisplayName("Mockito: devuelve las pizzas que entrega el repositorio")
     void debeDevolverPizzasDelRepositorio() {
-        Pizza hawaiana = new Pizza(1L, "Hawaiana", "Piña y jamón", new BigDecimal("30000"), 5, true);
+        Pizza hawaiana = new Pizza(1L, "Hawaiana", "Piña y jamón", new BigDecimal("387000"), 5, true);
         when(pizzaRepository.buscarDisponibles()).thenReturn(List.of(hawaiana));
 
         List<Pizza> resultado = catalogoService.consultarPizzasDisponibles();
