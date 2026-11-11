@@ -21,5 +21,14 @@ jobs:
         with:
           node-version: 20
 
+      - name: Descargar colección desde Postman
+        env:
+          POSTMAN_API_KEY: ${{ secrets.POSTMAN_API_KEY }}
+        run: |
+          curl --fail --silent --show-error \
+            --header "X-Api-Key: $POSTMAN_API_KEY" \
+            "https://api.getpostman.com/collections/48506505-077376db-eec0-4f36-8a67-0fe75fe30bae" \
+            | jq '.collection' > collection-postman.json
+
       - name: Ejecutar pruebas de Postman
-        run: npx --yes newman run "postman/My Collection.postman_collection.json"
+        run: npx --yes newman run collection-postman.json
