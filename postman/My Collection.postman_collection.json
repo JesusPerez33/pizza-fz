@@ -1,0 +1,72 @@
+{
+  "info": {
+    "_postman_id": "077376db-eec0-4f36-8a67-0fe75fe30bae",
+    "name": "My Collection",
+    "description": "### Welcome to Postman! This is your first collection. \n\nCollections are your starting point for building and testing APIs. You can use this one to:\n\n• Group related requests\n• Test your API in real-world scenarios\n• Document and share your requests\n\nUpdate the name and overview whenever you’re ready to make it yours.\n\n[Learn more about Postman Collections.](https://learning.postman.com/docs/collections/collections-overview/)",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "_exporter_id": "48506505",
+    "_collection_link": "https://go.postman.co/collection/48506505-077376db-eec0-4f36-8a67-0fe75fe30bae?source=collection_link"
+  },
+  "item": [
+    {
+      "name": "pizzaFZ",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "exec": [
+              "pm.test(\"ERROR 1: El pedido debe devolver 200\", function () {\r",
+              "    pm.response.to.have.status(200);\r",
+              "});\r",
+              "\r",
+              "pm.test(\"ERROR 2: El carrito debe tener un identificador 999\", function () {\r",
+              "    let respuesta = pm.response.json();\r",
+              "\r",
+              "    pm.expect(respuesta.id).to.eql(999);\r",
+              "});\r",
+              "\r",
+              "pm.test(\"ERROR 3: El total debe ser 50000\", function () {\r",
+              "    let respuesta = pm.response.json();\r",
+              "\r",
+              "    pm.expect(Number(respuesta.total)).to.eql(50000);\r",
+              "});"
+            ],
+            "type": "text/javascript",
+            "packages": {},
+            "requests": {}
+          }
+        }
+      ],
+      "request": {
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n    \"pizzaId\": 1,\r\n    \"cantidad\": 2\r\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "https://legendary-space-yodel-gjvxwgwj59qh9g5r-8080.app.github.dev/api/carrito/1/items",
+          "protocol": "https",
+          "host": [
+            "legendary-space-yodel-gjvxwgwj59qh9g5r-8080",
+            "app",
+            "github",
+            "dev"
+          ],
+          "path": [
+            "api",
+            "carrito",
+            "1",
+            "items"
+          ]
+        }
+      },
+      "response": []
+    }
+  ]
+}
