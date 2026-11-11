@@ -9,6 +9,29 @@
   },
   "item": [
     {
+      "name": "vaciar carrito",
+      "request": {
+        "method": "DELETE",
+        "header": [],
+        "url": {
+          "raw": "https://legendary-space-yodel-gjvxwgwj59qh9g5r-8080.app.github.dev/api/carrito/1",
+          "protocol": "https",
+          "host": [
+            "legendary-space-yodel-gjvxwgwj59qh9g5r-8080",
+            "app",
+            "github",
+            "dev"
+          ],
+          "path": [
+            "api",
+            "carrito",
+            "1"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
       "name": "pizzaFZ",
       "event": [
         {
