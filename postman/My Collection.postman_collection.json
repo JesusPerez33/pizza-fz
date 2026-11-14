@@ -13,21 +13,7 @@
       "request": {
         "method": "DELETE",
         "header": [],
-        "url": {
-          "raw": "https://legendary-space-yodel-gjvxwgwj59qh9g5r-8080.app.github.dev/api/carrito/1",
-          "protocol": "https",
-          "host": [
-            "legendary-space-yodel-gjvxwgwj59qh9g5r-8080",
-            "app",
-            "github",
-            "dev"
-          ],
-          "path": [
-            "api",
-            "carrito",
-            "1"
-          ]
-        }
+        "url": "{{baseUrl}}/api/carrito/1"
       },
       "response": []
     },
@@ -70,24 +56,15 @@
             }
           }
         },
-        "url": {
-          "raw": "https://legendary-space-yodel-gjvxwgwj59qh9g5r-8080.app.github.dev/api/carrito/1/items",
-          "protocol": "https",
-          "host": [
-            "legendary-space-yodel-gjvxwgwj59qh9g5r-8080",
-            "app",
-            "github",
-            "dev"
-          ],
-          "path": [
-            "api",
-            "carrito",
-            "1",
-            "items"
-          ]
-        }
+        "url": "{{baseUrl}}/api/carrito/1/items"
       },
       "response": []
+    }
+  ],
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "https://refactored-eureka-pj6jx5474q9x267jg-8080.app.github.dev"
     }
   ]
 }
