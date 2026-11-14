@@ -25,7 +25,7 @@
           "script": {
             "exec": [
               "pm.test(\"El pedido se creó correctamente\", function () {\r",
-              "    pm.response.to.have.status(200);\r",
+              "    pm.response.to.have.status(201);\r",
               "});\r",
               "\r",
               "pm.test(\"El carrito tiene un identificador\", function () {\r",
