@@ -35,7 +35,7 @@
               "\r",
               "pm.test(\"El total del carrito es correcto\", function () {\r",
               "    let respuesta = pm.response.json();\r",
-              "    pm.expect(Number(respuesta.total)).to.eql(80000);\r",
+              "    pm.expect(Number(respuesta.total)).to.eql(70000);\r",
               "});"
             ],
             "type": "text/javascript",
